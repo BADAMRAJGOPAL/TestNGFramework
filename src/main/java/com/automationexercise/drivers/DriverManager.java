@@ -2,19 +2,24 @@ package com.automationexercise.drivers;
 
 import org.openqa.selenium.WebDriver;
 
-public class DriverManager {
-    private static ThreadLocal<WebDriver> driver= new ThreadLocal<>();
+public final class DriverManager {
+    private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
-    private  DriverManager(){
+    private DriverManager() {
     }
-    public static WebDriver getDriver(){
+
+    public static WebDriver getDriver() {
         return driver.get();
     }
-    public static void setDriver(WebDriver driverInstance){
+
+    public static void setDriver(WebDriver driverInstance) {
+        if (driverInstance == null) {
+            throw new IllegalArgumentException("WebDriver instance cannot be null");
+        }
         driver.set(driverInstance);
     }
-    public static void unload(){
+
+    public static void unload() {
         driver.remove();
     }
-
 }

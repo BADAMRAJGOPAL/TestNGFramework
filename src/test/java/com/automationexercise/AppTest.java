@@ -1,16 +1,12 @@
 package com.automationexercise;
 
-import com.automationexercise.drivers.DriverFactory;
-import com.automationexercise.drivers.DriverManager;
+import com.automationexercise.basetest.BaseTest;
 import org.testng.annotations.Test;
 
 
-public class AppTest
-{
+public class AppTest extends BaseTest {
     @Test
-    public void Trial() throws InterruptedException {
-        DriverFactory.initDriver("Chrome");
-        DriverManager.getDriver().get("https://www.qaplayground.com/");
-        Thread.sleep(5000);
+    public void test(){
+        System.out.print("Hello World");
     }
 }
