@@ -1,5 +1,6 @@
 package com.automationexercise.basetest;
 
+import com.automationexercise.configreader.ConfigReader;
 import com.automationexercise.drivers.DriverFactory;
 import com.automationexercise.drivers.DriverManager;
 import org.openqa.selenium.WebDriver;
@@ -12,15 +13,15 @@ public class BaseTest {
     @BeforeMethod
     public void setup() {
         DriverFactory.initDriver();
-        driver.get("https://www.qaplayground.com/");
+        DriverManager.getDriver().get(ConfigReader.get("baseurl"));
         System.out.println("Before Method Executed");
     }
 
     @AfterMethod
     public void tearDown() {
         System.out.println("After Method Executed");
-        if (driver != null) {
-            driver.quit();
+        if (DriverManager.getDriver() != null) {
+            DriverManager.getDriver().quit();
             DriverManager.unload();
         }
     }
