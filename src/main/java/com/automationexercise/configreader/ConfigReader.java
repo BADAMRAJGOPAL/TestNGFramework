@@ -8,7 +8,7 @@ public class ConfigReader {
     static Properties properties = new Properties();
 
     static {
-        String path = "D:\\TestNGFramework\\src\\test\\java\\com\\automationexercise\\resources\\config.properties";
+        String path = System.getProperty("user.dir")+"/src/test/resources/config.properties";
         try (FileInputStream fis = new FileInputStream(path)) {
             properties.load(fis);
         } catch (IOException e) {

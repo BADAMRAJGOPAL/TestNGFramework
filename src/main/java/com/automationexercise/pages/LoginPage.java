@@ -1,5 +1,7 @@
 package com.automationexercise.pages;
 
+import com.automationexercise.pages.basepage.BasePage;
+import com.automationexercise.utils.WaitUtils;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,12 +11,10 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginPage {
-    private WebDriver driver;
+public class LoginPage extends BasePage {
 
     public LoginPage(WebDriver driver){
-        this.driver= driver;
-        PageFactory.initElements(driver,this);
+        super(driver);
     }
     @FindBy(id = "username") private WebElement usernameInput;
     @FindBy(id = "password") private WebElement passwordInput;
@@ -28,16 +28,16 @@ public class LoginPage {
     public Map<String, String> getDemoCred(){
         Map<String, String> demoCreds= new HashMap<>();
         String userName=demoUsernameText.getText();
-        demoCreds.put("User Name",userName);
+        demoCreds.put("username",userName);
         String password=demoPasswordText.getText();
-        demoCreds.put("Password",password);
+        demoCreds.put("password",password);
         return demoCreds;
     }
 
     @Step("Enter Login Cred")
-    public void enterLoginCreds(String username, String password){
-        usernameInput.sendKeys(username);
-        passwordInput.sendKeys(password);
+    public void enterLoginCreds(Map creds){
+        usernameInput.sendKeys(creds.get("username").toString());
+        passwordInput.sendKeys(creds.get("password").toString());
     }
 
     @Step("Click on Login Button")
